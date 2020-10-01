@@ -1,0 +1,7 @@
+{
+  "name": "reminder",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { FormControl } from "@angular/forms";
+import { ItemsService } from "../service/items.service";
 
 @Component({
   selector: "app-home",
@@ -6,20 +8,31 @@ import { Component } from "@angular/core";
   styleUrls: ["home.page.scss"],
 })
 export class HomePage {
-  constructor() {}
-  // AWS.config.update({
-  //   region: "us-west-2",
-  //   endpoint: 'http://localhost:8000',
-  //   // accessKeyId default can be used while using the downloadable version of DynamoDB.
-  //   // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
-  //   accessKeyId: "fakeMyKeyId",
-  //   // secretAccessKey default can be used while using the downloadable version of DynamoDB.
-  //   // For security reasons, do not store AWS Credentials in your files. Use Amazon Cognito instead.
-  //   secretAccessKey: "fakeSecretAccessKey"
-  // });
+  constructor(private serviceItem: ItemsService) {
+    serviceItem.getList().subscribe((r) => {
+      console.log("LOL-> ", r);
+    });
+  }
 
+  name = new FormControl("");
 
+  list = [];
 
+  add(item) {
+    console.log("POST--> ", item, "NAME->", this.name.value);
+    this.serviceItem.postItem(name);
+  }
+  update(item) {
+    console.log("PUT--> ", item);
+    this.serviceItem.putItem(item);
+  }
+  remove(item) {
+    console.log("DELETE--> ", item);
+    this.serviceItem.deleteItem(item);
+  }
+}
 
-  
+interface item {
+  id: string;
+  name: string;
 }

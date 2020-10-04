@@ -7,6 +7,7 @@ import { HttpClient } from "@angular/common/http";
 export class ItemsService {
   constructor(private _httpClient: HttpClient) {}
   // urlBase = "https://restcountries.eu/rest/";
+  urlLambda= "https://kql85v0rw3.execute-api.us-east-1.amazonaws.com/dev/";
   urlBase = "./../../assets/listData.json";
   // listData = [
   //   { id: 1, name: "Uno" },
@@ -17,12 +18,14 @@ export class ItemsService {
   // ];
 
   getList() {
-    let url = this.urlBase + "v2/alpha/" + "pan";
-    return this._httpClient.get("./../../assets/listData.json");
+   // let url = this.urlBase + "v2/alpha/" + "pan";
+   let url = this.urlLambda+"getAll"; //"v2/alpha/" + "pan";
+    return this._httpClient.get(url);
   }
 
   postItem(item) {
-    let url = this.urlBase; //"v2/alpha/" + "pan";
+    let url = this.urlLambda+"agregar"; //"v2/alpha/" + "pan";
+    console.log("urlll",url,"item",item);
     return this._httpClient.post(url, item);
   }
 

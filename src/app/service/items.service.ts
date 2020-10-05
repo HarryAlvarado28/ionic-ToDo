@@ -30,12 +30,14 @@ export class ItemsService {
   }
 
   putItem(item) {
-    let url = this.urlBase + "v2/alpha/" + "pan";
+   // let url = this.urlBase + "v2/alpha/" + "pan";
+    let url = this.urlLambda+"update";
     return this._httpClient.put(url, item);
   }
 
   deleteItem(item) {
-    let url = this.urlBase + "v2/alpha/" + "pan";
+    //let url = this.urlBase + "v2/alpha/" + "pan";
+    let url = this.urlLambda+"delete/"+item;
     return this._httpClient.delete(url);
   }
 }
